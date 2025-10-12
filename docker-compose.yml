@@ -7,17 +7,12 @@ services:
       # Chances are, Traefik will tell you why.
       # Be careful in production as it exposes the traffic you might not want to expose.
       #--log.level=DEBUG
-
       - --entrypoints.http.address=:80
       - --entrypoints.https.address=:443
-
       - --providers.docker=true
-
       - --api=true
-
       # LetsEncrypt Staging Server - uncomment when testing
       # - --certificatesResolvers.letsencrypt.acme.caServer=https://acme-staging-v02.api.letsencrypt.org/directory
-
       - --certificatesresolvers.letsencrypt.acme.httpchallenge=true
       - --certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=http
       - --certificatesresolvers.letsencrypt.acme.email=${EMAIL}
@@ -27,7 +22,6 @@ services:
       - traefik.http.routers.to-https.rule=HostRegexp(`{host:.+}`)
       - traefik.http.routers.to-https.entrypoints=http
       - traefik.http.routers.to-https.middlewares=to-https
-
       - traefik.http.routers.traefik.rule=Host(`traefik.${DOMAIN}`)
       - traefik.http.routers.traefik.entrypoints=https
       - traefik.http.routers.traefik.middlewares=auth
@@ -52,7 +46,7 @@ services:
       - traefik.enable=true
       - traefik.http.routers.n8n.rule=Host(`${DOMAIN}`)
       - traefik.http.routers.n8n.tls=true
-      - traefik.http.routers.n8n.entrypoints=web,websecure
+      - traefik.http.routers.n8n.entrypoints=http,https
       - traefik.http.routers.n8n.tls.certresolver=${CERT_RESOLVER}
       - traefik.http.middlewares.n8n.headers.SSLRedirect=true
       - traefik.http.middlewares.n8n.headers.STSSeconds=315360000
