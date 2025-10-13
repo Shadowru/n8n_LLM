@@ -105,3 +105,4 @@ volumes:
   n8n_data:
   traefik_data:
   ollama_volume:
+  db_data:
