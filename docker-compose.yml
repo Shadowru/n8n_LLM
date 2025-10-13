@@ -94,6 +94,13 @@ services:
   ollama:
     image: ollama/ollama:latest
     pull_policy: always
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            capabilities: ["gpu"]
+            count: all
     ports:
       - "11434:11434"
     environment:
