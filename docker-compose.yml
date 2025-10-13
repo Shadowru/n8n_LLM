@@ -1,6 +1,7 @@
 services:
 
   traefik:
+    container_name: traefik
     image: traefik
     command:
       # Try to enable this if something isn't working..
@@ -38,6 +39,7 @@ services:
       - traefik_data:/letsencrypt
       - /var/run/docker.sock:/var/run/docker.sock:ro
   n8n:
+    container_name: n8n
     image: docker.n8n.io/n8nio/n8n
     restart: always
     ports:
@@ -83,6 +85,7 @@ services:
     depends_on:
       - db
   db:
+    container_name: db
     image: postgres:12
     restart: unless-stopped
     environment:
@@ -92,6 +95,7 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data    
   ollama:
+    container_name: ollama
     image: ollama/ollama:latest
     pull_policy: always
     deploy:
