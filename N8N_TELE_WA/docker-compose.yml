@@ -124,6 +124,11 @@ services:
       - traefik.http.middlewares.waha.headers.STSIncludeSubdomains=true
       - traefik.http.middlewares.waha.headers.STSPreload=true
       - traefik.http.routers.waha.middlewares=waha@docker
+    environment:
+      - WAHA_API_KEY=#{WAHA_API_KEY}
+      - WAHA_DASHBOARD_ENABLED=true
+      - WAHA_DASHBOARD_USERNAME=wahadmin
+      - WAHA_DASHBOARD_PASSWORD=${WAHA_PWD}
     logging:
       driver: 'json-file'
       options:
