@@ -99,13 +99,6 @@ services:
     container_name: ollama
     image: ollama/ollama
     pull_policy: always
-    deploy:
-      resources:
-        reservations:
-          devices:
-          - driver: nvidia
-            capabilities: ["gpu"]
-            count: all
     ports:
       - "11434:11434"
     environment:
