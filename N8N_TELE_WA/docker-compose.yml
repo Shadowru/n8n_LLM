@@ -123,7 +123,7 @@ services:
       - traefik.http.middlewares.waha.headers.SSLHost=waha.${DOMAIN}
       - traefik.http.middlewares.waha.headers.STSIncludeSubdomains=true
       - traefik.http.middlewares.waha.headers.STSPreload=true
-      - traefik.http.routers.waha.middlewares=whatsapp@docker
+      - traefik.http.routers.waha.middlewares=waha@docker
     logging:
       driver: 'json-file'
       options:
