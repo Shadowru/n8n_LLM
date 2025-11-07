@@ -109,6 +109,21 @@ services:
     container_name: whatsapp
     image: devlikeapro/waha
     restart: always
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.waha.rule=Host(`waha.${DOMAIN}`)
+      - traefik.http.routers.waha.tls=true
+      - traefik.http.routers.waha.entrypoints=http,https
+      - traefik.http.routers.waha.tls.certresolver=${CERT_RESOLVER}
+      - traefik.http.middlewares.waha.headers.SSLRedirect=true
+      - traefik.http.middlewares.waha.headers.STSSeconds=315360000
+      - traefik.http.middlewares.waha.headers.browserXSSFilter=true
+      - traefik.http.middlewares.waha.headers.contentTypeNosniff=true
+      - traefik.http.middlewares.waha.headers.forceSTSHeader=true
+      - traefik.http.middlewares.waha.headers.SSLHost=waha.${DOMAIN}
+      - traefik.http.middlewares.waha.headers.STSIncludeSubdomains=true
+      - traefik.http.middlewares.waha.headers.STSPreload=true
+      - traefik.http.routers.waha.middlewares=whatsapp@docker
     logging:
       driver: 'json-file'
       options:
