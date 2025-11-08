@@ -96,8 +96,7 @@ services:
       - db_data:/var/lib/postgresql/data    
   ollama:
     container_name: ollama
-    image: ollama/ollama:latest
-    pull_policy: always
+    image: ollama/ollama
     deploy:
       resources:
         reservations:
